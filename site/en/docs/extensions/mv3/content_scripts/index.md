@@ -200,11 +200,11 @@ proposal](https://docs.google.com/document/d/1p2jnIL3znAhD2VVuEbzOetgj1Qeya9yATa
 additional details.
 
 ```js
-chrome.scripting.registerContentScripts(optionsObject, callback);
+chrome.scripting.registerContentScripts(optionsObjectArray, callback);
 ```
 
 ```js
-chrome.scripting.unregisterContentScript(idArray, callback);
+chrome.scripting.unregisterContentScripts(filter, callback);
 ```
 {% endif %}
 
@@ -357,12 +357,12 @@ but not into **https://www.nytimes.com/ business** .
 }
 ```
 ```js/2
-chrome.scripting.registerContentScripts({
+chrome.scripting.registerContentScripts([{
   id: 1,
   matches: ["https://*.nytimes.com/*"],
   exclude_matches: ["*://*/*business*"],
   js: ["contentScript.js"]
-});
+}]);
 ```
 
 Glob properties follow a different, more flexible syntax than [match patterns][24]. Acceptable glob
@@ -400,12 +400,12 @@ This extension injects the content script into **https://www.nytimes.com/arts/in
 }
 ```
 ```js/3
-chrome.scripting.registerContentScripts({
+chrome.scripting.registerContentScripts([{
   id: 1,
   matches: ['https://*.nytimes.com/*'],
   include_globs: ['*nytimes.com/???s/*'],
   js: ['contentScript.js']
-});
+}]);
 ```
 
 This extension injects the content script into **https://history.nytimes.com** and
@@ -427,12 +427,12 @@ This extension injects the content script into **https://history.nytimes.com** a
 }
 ```
 ```js/3
-chrome.scripting.registerContentScripts({
+chrome.scripting.registerContentScripts([{
   id: 1,
   matches: ['https://*.nytimes.com/*'],
   exclude_globs: ['*science*'],
   js: ['contentScript.js']
-});
+}]);
 ```
 
 One, all, or some of these can be included to achieve the correct scope.
@@ -454,13 +454,13 @@ One, all, or some of these can be included to achieve the correct scope.
 }
 ```
 ```js/2-4
-chrome.scripting.registerContentScripts({
+chrome.scripting.registerContentScripts([{
   matches: ['https://*.nytimes.com/*'],
   exclude_matches: ['*://*/*business*'],
   include_globs: ['*nytimes.com/???s/*'],
   exclude_globs: ['*science*'],
   js: ['contentScript.js']
-});
+}]);
 ```
 
 ### Run time {: #run_time }
@@ -484,11 +484,11 @@ preferred and default value is `"document_idle"`, but you can also specify `"doc
 }
 ```
 ```js/2
-chrome.scripting.registerContentScripts({
+chrome.scripting.registerContentScripts([{
   matches: ['https://*.nytimes.com/*'],
   run_at: 'document_idle',
   js: ['contentScript.js']
-});
+}]);
 ```
 
 <table class="simple">
@@ -550,11 +550,11 @@ tab.
 }
 ```
 ```js/2
-chrome.scripting.registerContentScripts({
+chrome.scripting.registerContentScripts([{
   matches: ['https://*.nytimes.com/*'],
   all_frames: true,
   js: ['contentScript.js']
-});
+}]);
 ```
 
 <table class="simple">
