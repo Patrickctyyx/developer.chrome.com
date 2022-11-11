@@ -2,7 +2,7 @@
 layout: "layouts/doc-post.njk"
 title: "Content scripts"
 date: 2012-09-17
-updated: 2021-08-02
+updated: 2022-11-11
 description: An explanation of content scripts and how to use them in your Chrome Extension.
 ---
 
@@ -12,7 +12,7 @@ changes to them, and pass information to their parent extension.
 
 ## Understand content script capabilities {: #capabilities }
 
-Content scripts can access Chrome APIs used by their parent extension by exchanging [messages][2]
+Content scripts can access Chrome APIs used by their parent extension by exchanging [messages][2]reg
 with the extension. They can also access the URL of an extension's file with
 `chrome.runtime.getURL()` and use the result the same as other URLs.
 
@@ -200,7 +200,7 @@ proposal](https://docs.google.com/document/d/1p2jnIL3znAhD2VVuEbzOetgj1Qeya9yATa
 additional details.
 
 ```js
-chrome.scripting.registerContentScript(optionsObject, callback);
+chrome.scripting.registerContentScripts(optionsObject, callback);
 ```
 
 ```js
@@ -357,7 +357,7 @@ but not into **https://www.nytimes.com/ business** .
 }
 ```
 ```js/2
-chrome.scripting.registerContentScript({
+chrome.scripting.registerContentScripts({
   id: 1,
   matches: ["https://*.nytimes.com/*"],
   exclude_matches: ["*://*/*business*"],
@@ -400,7 +400,7 @@ This extension injects the content script into **https://www.nytimes.com/arts/in
 }
 ```
 ```js/3
-chrome.scripting.registerContentScript({
+chrome.scripting.registerContentScripts({
   id: 1,
   matches: ['https://*.nytimes.com/*'],
   include_globs: ['*nytimes.com/???s/*'],
@@ -427,7 +427,7 @@ This extension injects the content script into **https://history.nytimes.com** a
 }
 ```
 ```js/3
-chrome.scripting.registerContentScript({
+chrome.scripting.registerContentScripts({
   id: 1,
   matches: ['https://*.nytimes.com/*'],
   exclude_globs: ['*science*'],
@@ -454,7 +454,7 @@ One, all, or some of these can be included to achieve the correct scope.
 }
 ```
 ```js/2-4
-chrome.scripting.registerContentScript({
+chrome.scripting.registerContentScripts({
   matches: ['https://*.nytimes.com/*'],
   exclude_matches: ['*://*/*business*'],
   include_globs: ['*nytimes.com/???s/*'],
@@ -484,7 +484,7 @@ preferred and default value is `"document_idle"`, but you can also specify `"doc
 }
 ```
 ```js/2
-chrome.scripting.registerContentScript({
+chrome.scripting.registerContentScripts({
   matches: ['https://*.nytimes.com/*'],
   run_at: 'document_idle',
   js: ['contentScript.js']
@@ -550,7 +550,7 @@ tab.
 }
 ```
 ```js/2
-chrome.scripting.registerContentScript({
+chrome.scripting.registerContentScripts({
   matches: ['https://*.nytimes.com/*'],
   all_frames: true,
   js: ['contentScript.js']
